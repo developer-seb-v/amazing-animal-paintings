@@ -10,6 +10,7 @@ import { Product } from '../models/product';
 export class CartService {
 
   private apiURL = environment.apiUrl + "/cart";
+  private apiCartURL = environment.apiUrl + "/checkout";
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +26,8 @@ export class CartService {
     return this.http.delete<void>(this.apiURL);
   }
 
-
+  checkout(products: Product[]): Observable<void> {
+    return this.http.post<void>(this.apiCartURL, products);
+  }
 
 }
